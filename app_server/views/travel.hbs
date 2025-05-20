@@ -16,24 +16,13 @@
             <div class="body">
               <h1>Travel</h1>
               <ul id="sites">
-                <li>
-                  <a href="/travel"><img src="images/reef1.jpg" alt="Img"></a>
-                  <h2><a href="/travel">Gale Reef</a></h2>
-                  <p>Sed et augue lorem... Fusce at pretium felis.</p>
-                  <p>Sed consequat libero... vitae laoreet.</p>
-                </li>
-                <li>
-                  <a href="/travel"><img src="images/reef2.jpg" alt="Img"></a>
-                  <h2><a href="/travel">Dawson’s Reef</a></h2>
-                  <p>Integer magna leo... tristique quis nisl.</p>
-                  <p>Morbi aliquet viverra... vel sapien.</p>
-                </li>
-                <li>
-                  <a href="/travel"><img src="images/reef3.jpg" alt="Img"></a>
-                  <h2><a href="/travel">Claire’s Reef</a></h2>
-                  <p>Donec sed felis risus... molestie lorem.</p>
-                  <p>Integer purus justo... cursus in tortor.</p>
-                </li>
+                {{#each trips}}
+                  <li>
+                    <a href="/travel"><img src="{{this.image}}" alt="Image of {{this.name}}"></a>
+                    <h2><a href="/travel">{{this.name}}</a></h2>
+                    {{{this.description}}}
+                  </li>
+                {{/each}}
               </ul>
             </div>
           </div>
@@ -42,7 +31,6 @@
     </div>
 
     {{> footer }}
-
   </div>
 </body>
 </html>
