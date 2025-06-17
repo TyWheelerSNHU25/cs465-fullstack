@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 import { Trip } from '../models/trip';
 
 @Component({
@@ -8,20 +9,21 @@ import { Trip } from '../models/trip';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './trip-card.component.html',
-  styleUrl: './trip-card.component.css'
+  styleUrls: ['./trip-card.component.css']
 })
-export class TripCardComponent implements OnInit {
+export class TripCardComponent {
+  @Input() trip!: Trip;
 
-  @Input('trip') trip: any;
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
+  editTrip(trip: Trip): void {
+    this.router.navigate(['/edit-trip', trip.code]);
   }
 
-  public editTrip(trip: Trip) {
-    localStorage.removeItem('tripCode');
-    localStorage.setItem('tripCode', trip.code);
-    this.router.navigate(['edit-trip']);
+  public isLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
   }
 }
