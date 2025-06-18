@@ -5,4 +5,5 @@ const travelController = require('../controllers/travel');
 
 router.get('/', travelController.travel);
 
+
 module.exports = router;
